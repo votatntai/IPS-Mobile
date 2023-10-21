@@ -6,23 +6,31 @@ part 'user_model.g.dart';
 
 @JsonSerializable(explicitToJson: false)
 class UserModel extends Equatable {
-  final String? address;
-  final String? birthDate;
+  final String id;
+  final String firstName;
+  final String lastName;
   final String email;
-  final String? grade;
-  final String name;
-  final String? phoneNumber;
-  final String? school;
-  final String? accessToken;
+  final String? avatarUrl;
+  String? classStatus;
+  final String college;
+  final String? phone;
+  final String? address;
+  final String? dayOfBirth;
+  final String status;
+  String? accessToken;
 
-  const UserModel({
-    this.address,
-    this.birthDate,
+  UserModel({
+    required this.id,
+    required this.firstName,
+    required this.lastName,
     required this.email,
-    this.grade,
-    required this.name,
-    this.phoneNumber,
-    this.school,
+    this.avatarUrl,
+    this.classStatus,
+    required this.college,
+    this.phone,
+    this.address,
+    this.dayOfBirth,
+    required this.status,
     this.accessToken,
   });
 
@@ -36,15 +44,24 @@ class UserModel extends Equatable {
     String? phoneNumber,
     String? school,
     String? accessToken,
+    String? avatarUrl,
+    String? classStatus,
+    String? phone,
+    String? dayOfBirth,
+    String? status,
   }) {
     return UserModel(
+      id: id,
+      firstName: firstName,
+      lastName: lastName,
       email: email ?? this.email,
-      name: name ?? this.name,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
+      classStatus: classStatus ?? this.classStatus,
+      college: college,
+      phone: phone ?? this.phone,
       address: address ?? this.address,
-      birthDate: birthDate ?? this.birthDate,
-      grade: grade ?? this.grade,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
-      school: school ?? this.school,
+      dayOfBirth: dayOfBirth ?? this.dayOfBirth,
+      status: status ?? this.status,
       accessToken: accessToken ?? this.accessToken,
     );
   }
@@ -52,8 +69,8 @@ class UserModel extends Equatable {
   @override
   List<Object?> get props => [];
 
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
+  factory UserModel.fromJson(Map<String, dynamic> json, String accessToken) =>
+      _$UserModelFromJson(json, accessToken);
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }

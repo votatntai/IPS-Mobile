@@ -26,16 +26,14 @@ class SignInPageBloc extends Bloc<SignInPageEvent, SignInPageState> {
       SignInButtonEvent event, Emitter<SignInPageState> emit) async {
     GoogleSignInAccount? googleSignInAccount =
         await _userService.signInWithGoogle();
-
     if (googleSignInAccount != null) {
       GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount.authentication;
       User? user =
           await _userService.signInToFirebase(googleSignInAuthentication);
-
       if (user != null) {
         UserModel? userModel =
-            await _userService.signInToApp(idToken: await user.getIdToken());
+            await _userService.signInToApp(idToken: await user.getIdToken() ?? '');
         if (userModel != null) {
           emit(
             state.updateStateWith(
@@ -68,7 +66,7 @@ class SignInPageBloc extends Bloc<SignInPageEvent, SignInPageState> {
 
   _onSignInEvent(SignInEvent event, Emitter<SignInPageState> emit) {
     emit(state.updateStateWith(userModel: event.userModel));
-    log(event.userModel.name);
-    log(state.userModel!.name);
+    log(event.userModel.id);
+    log(state.userModel!.id);
   }
 }

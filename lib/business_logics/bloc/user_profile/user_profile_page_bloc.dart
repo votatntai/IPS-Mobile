@@ -5,6 +5,7 @@ import 'package:flutter_application_1/business_logics/bloc/user_profile/user_pro
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../data/api_handling/user_service.dart';
 import '../../../data/models/user_model/user_model.dart';
@@ -26,9 +27,13 @@ class UserProfilePageBloc
       TextEditingController();
   final FocusNode mailFocusNode = FocusNode();
 
-  final TextEditingController nameTextEditingController =
+  final TextEditingController firstNameTextEditingController =
       TextEditingController();
-  final FocusNode nameFocusNode = FocusNode();
+  final FocusNode firstNameFocusNode = FocusNode();
+
+  final TextEditingController lastNameTextEditingController =
+  TextEditingController();
+  final FocusNode lastNameFocusNode = FocusNode();
 
   final TextEditingController addressEditingController =
       TextEditingController();
@@ -43,7 +48,8 @@ class UserProfilePageBloc
   final FocusNode gradeFocusNode = FocusNode();
 
   UserProfilePageBloc(super.initialState) {
-    on<FullNameValidationEvent>(_onFullNameValidationEvent);
+    on<FirstNameValidationEvent>(_onFirstNameValidationEvent);
+    on<LastNameValidationEvent>(_onLastNameValidationEvent);
     on<PhoneValidationEvent>(_onPhoneNumberValidationEvent);
     on<SchoolValidationEvent>(_onSchoolValidationEvent);
     on<GradeValidationEvent>(_onGradeValidationEvent);
@@ -62,6 +68,7 @@ class UserProfilePageBloc
     emit(state.updateStateWith(isInit: true));
     await _storage.deleteAll();
     await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
     event.navigatorToSignInPage();
   }
 
@@ -72,28 +79,44 @@ class UserProfilePageBloc
 
     if (_userModel != null) {
       mailTextEditingController.text = _userModel!.email;
-      nameTextEditingController.text = _userModel!.name;
-      phoneNumberTextEditingController.text = _userModel!.phoneNumber ?? '';
-      schoolTextEditingController.text = _userModel!.school ?? '';
+      firstNameTextEditingController.text = _userModel!.firstName;
+      lastNameTextEditingController.text = _userModel!.lastName;
+      phoneNumberTextEditingController.text = _userModel!.phone ?? '';
+      schoolTextEditingController.text = _userModel!.college ?? '';
       addressEditingController.text = _userModel!.address ?? '';
-      if (_userModel!.grade!.isNotEmpty) {
-        grade = _userModel!.grade;
-      }
+      // if (_userModel!.grade!.isNotEmpty) {
+      //   grade = _userModel!.grade;
+      // }
     }
 
     emit(state.updateStateWith(isInit: false, selectedGrade: grade));
   }
 
-  _onFullNameValidationEvent(
-      FullNameValidationEvent event, Emitter<UserProfilePageState> emit) {
-    String fullNameErrorMsg = '';
-    if (nameTextEditingController.text.isEmpty) {
-      fullNameErrorMsg = 'Full name field can\'t be empty';
+  _onFirstNameValidationEvent(
+      FirstNameValidationEvent event, Emitter<UserProfilePageState> emit) {
+    String firstNameErrorMsg = '';
+    if (firstNameTextEditingController.text.isEmpty) {
+      firstNameErrorMsg = 'First name field can\'t be empty';
     }
     emit(
       state.updateStateWith(
-        fullNameErrorMsg: fullNameErrorMsg,
-        isChange: nameTextEditingController.text != _userModel?.name ||
+        firstNameErrorMsg: firstNameErrorMsg,
+        isChange: firstNameTextEditingController.text != _userModel?.firstName ||
+            state.isChange,
+      ),
+    );
+  }
+
+  _onLastNameValidationEvent(
+      LastNameValidationEvent event, Emitter<UserProfilePageState> emit) {
+    String lastNameErrorMsg = '';
+    if (lastNameTextEditingController.text.isEmpty) {
+      lastNameErrorMsg = 'Last name field can\'t be empty';
+    }
+    emit(
+      state.updateStateWith(
+        lastNameErrorMsg: lastNameErrorMsg,
+        isChange: lastNameTextEditingController.text != _userModel?.firstName ||
             state.isChange,
       ),
     );
@@ -104,7 +127,7 @@ class UserProfilePageBloc
     emit(
       state.updateStateWith(
         isChange:
-            phoneNumberTextEditingController.text == _userModel?.phoneNumber ||
+            phoneNumberTextEditingController.text == _userModel?.phone ||
                 state.isChange,
       ),
     );
@@ -114,7 +137,7 @@ class UserProfilePageBloc
       SchoolValidationEvent event, Emitter<UserProfilePageState> emit) {
     emit(
       state.updateStateWith(
-        isChange: schoolTextEditingController.text != _userModel?.school ||
+        isChange: schoolTextEditingController.text != _userModel?.college ||
             state.isChange,
       ),
     );
@@ -135,14 +158,15 @@ class UserProfilePageBloc
 
   _onContinueButtonEvent(
       SaveButtonEvent event, Emitter<UserProfilePageState> emit) async {
-    if (state.fullNameErrorMsg.isEmpty) {
+    if (state.firstNameErrorMsg.isEmpty || state.lastNameErrorMsg.isEmpty) {
       _unFocusAll();
 
       emit(state.updateStateWith(isWaitingUpdateProfile: true));
 
       UserModel? userModel = await _userService.updateProfile(
         jwt: _jwt,
-        name: nameTextEditingController.text,
+        firstName: firstNameTextEditingController.text,
+        lastName: lastNameTextEditingController.text,
         mail: mailTextEditingController.text,
         address: addressEditingController.text,
         grade: state.selectedGrade,
@@ -186,7 +210,7 @@ class UserProfilePageBloc
     emit(
       state.updateStateWith(
         selectedGrade: event.grade,
-        isChange: event.grade != _userModel?.grade || state.isChange,
+        isChange: event.grade != _userModel?.dayOfBirth || state.isChange,
       ),
     );
   }
@@ -198,7 +222,8 @@ class UserProfilePageBloc
 
   _unFocusAll() {
     phoneNumberFocusNode.unfocus();
-    nameFocusNode.unfocus();
+    firstNameFocusNode.unfocus();
+    lastNameFocusNode.unfocus();
     schoolFocusNode.unfocus();
     gradeFocusNode.unfocus();
     addressFocusNode.unfocus();

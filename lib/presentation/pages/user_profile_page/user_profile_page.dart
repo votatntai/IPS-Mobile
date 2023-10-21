@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/presentation/pages/user_profile_page/widgets/last_name_text_field_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_application_1/business_logics/bloc/user_profile/user_profile_page_bloc.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_application_1/presentation/pages/user_profile_page/widge
 import 'package:flutter_application_1/presentation/pages/user_profile_page/widgets/grade_text_field_widget.dart';
 import 'package:flutter_application_1/presentation/pages/user_profile_page/widgets/loading_widget.dart';
 import 'package:flutter_application_1/presentation/pages/user_profile_page/widgets/mail_text_field_widget.dart';
-import 'package:flutter_application_1/presentation/pages/user_profile_page/widgets/name_text_field_widget.dart';
+import 'package:flutter_application_1/presentation/pages/user_profile_page/widgets/first_name_text_field_widget.dart';
 import 'package:flutter_application_1/presentation/pages/user_profile_page/widgets/phone_number_text_field.dart';
 import 'package:flutter_application_1/presentation/pages/user_profile_page/widgets/save_button_widget.dart';
 import 'package:flutter_application_1/presentation/pages/user_profile_page/widgets/school_text_field_widget.dart';
@@ -46,7 +47,9 @@ class UserProfilePage extends StatelessWidget {
                             child: Column(
                               children: const [
                                 SizedBox(height: 10),
-                                NameTextFieldWidget(),
+                                FirstNameTextFieldWidget(),
+                                SizedBox(height: 10),
+                                LastNameTextFieldWidget(),
                                 SizedBox(height: 10),
                                 MailTextFieldWidget(),
                                 SizedBox(height: 10),

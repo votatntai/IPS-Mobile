@@ -1,0 +1,148 @@
+{
+  "project_info": {
+    "project_number": "957158933086",
+    "project_id": "plant-detection-7a03e",
+    "storage_bucket": "plant-detection-7a03e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957158933086:android:5dd863ff033b515ee7aacf",
+        "android_client_info": {
+          "package_name": "com.fdetect.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "957158933086-b6ei89n58mgeg442dsfmd9e0e54b6582.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fdetect.flutter_application_1",
+            "certificate_hash": "76e59c0267004325d5e83ef4e4793d53e9960317"
+          }
+        },
+        {
+          "client_id": "957158933086-h15p2rhhnmbrb1ckbu4q940qpeg4i47o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fdetect.flutter_application_1",
+            "certificate_hash": "8ff8863e5ed52171b06bdb36996088c81d5c1cc6"
+          }
+        },
+        {
+          "client_id": "957158933086-i064hr02p1ehfuo73rp8tqkdr898s166.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fdetect.flutter_application_1",
+            "certificate_hash": "bc17a68fb84ec04b7b2cbc65734fa28d28af5202"
+          }
+        },
+        {
+          "client_id": "957158933086-motkmnj57tn210rghq71od0q7cc6j66h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fdetect.flutter_application_1",
+            "certificate_hash": "601db5e0cbac2cada8fe7d214e5f10cb8cc2c0d4"
+          }
+        },
+        {
+          "client_id": "957158933086-s4gb9q8mo4tll4al0va1o6nl8h003799.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fdetect.flutter_application_1",
+            "certificate_hash": "9a5abf388354c5f76d7296baf719a7c2c0b0aaae"
+          }
+        },
+        {
+          "client_id": "957158933086-86n256a92svnap7p5hmk6nm7gno3irok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5RCbfIgB4fwETFigEJXBByjUyj_68iN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "957158933086-86n256a92svnap7p5hmk6nm7gno3irok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957158933086:android:8b5688a19594d3a0e7aacf",
+        "android_client_info": {
+          "package_name": "com.prokit.plant_detection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "957158933086-1hvf1ld6mhvtc0giipj0hc32q86agn45.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.prokit.plant_detection",
+            "certificate_hash": "8ff8863e5ed52171b06bdb36996088c81d5c1cc6"
+          }
+        },
+        {
+          "client_id": "957158933086-5mjln5o28s7rc5421emmsf18ad0bpqdd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.prokit.plant_detection",
+            "certificate_hash": "bc17a68fb84ec04b7b2cbc65734fa28d28af5202"
+          }
+        },
+        {
+          "client_id": "957158933086-khbj2bo0a9esid59b789mmmmb9754902.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.prokit.plant_detection",
+            "certificate_hash": "76e59c0267004325d5e83ef4e4793d53e9960317"
+          }
+        },
+        {
+          "client_id": "957158933086-o9qabrp65uf0desl1s17bem7a4oe6gur.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.prokit.plant_detection",
+            "certificate_hash": "9a5abf388354c5f76d7296baf719a7c2c0b0aaae"
+          }
+        },
+        {
+          "client_id": "957158933086-u2u21h8u25uj8lp1u2u8embd0bc35vtg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.prokit.plant_detection",
+            "certificate_hash": "601db5e0cbac2cada8fe7d214e5f10cb8cc2c0d4"
+          }
+        },
+        {
+          "client_id": "957158933086-86n256a92svnap7p5hmk6nm7gno3irok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5RCbfIgB4fwETFigEJXBByjUyj_68iN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "957158933086-86n256a92svnap7p5hmk6nm7gno3irok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

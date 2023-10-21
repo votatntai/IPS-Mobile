@@ -6,24 +6,30 @@ part of 'user_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
-      address: json['address'] as String?,
-      birthDate: json['birthDate'] as String?,
-      email: json['email'] as String,
-      grade: json['grade'] as String?,
-      name: json['name'] as String,
-      phoneNumber: json['phoneNumber'] as String?,
-      school: json['school'] as String?,
-      accessToken: json['accessToken'] as String?,
+UserModel _$UserModelFromJson(Map<String, dynamic> json, String accessToken) => UserModel(
+      id: json['id'] ?? '',
+      firstName: json['firstName'] ?? '',
+      lastName: json['lastName'] ?? '',
+      email: json['email'] ?? '',
+      avatarUrl: json['avatarUrl'] ?? '',
+      college: json['college'] ?? '',
+      phone: json['phone'] ?? '',
+      address: json['address'] ?? '',
+      dayOfBirth: json['dayOfBirth'] ?? '',
+      status: json['status'] ?? '',
+      accessToken: accessToken,
     );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
-      'address': instance.address,
-      'birthDate': instance.birthDate,
+      'id': instance.id,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
       'email': instance.email,
-      'grade': instance.grade,
-      'name': instance.name,
-      'phoneNumber': instance.phoneNumber,
-      'school': instance.school,
+      'avatarUrl': instance.avatarUrl,
+      'college': instance.college,
+      'phone': instance.phone,
+      'address': instance.address,
+      'dayOfBirth': instance.dayOfBirth,
+      'status': instance.status,
       'accessToken': instance.accessToken,
-    };
+};

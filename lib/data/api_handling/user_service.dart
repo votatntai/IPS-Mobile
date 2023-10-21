@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/data/api_handling/api_path_constant.dart';
@@ -49,28 +50,28 @@ class UserService {
   }
 
   Future<UserModel?> signInToApp({required String idToken}) async {
-    final http.Response response = await http.post(
-      Uri.http(APIPathConstant.API_SERVER_PATH, '/api/v1/auth/login'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode({
-        'accessToken': idToken,
-      }),
-    );
-
-    switch (response.statusCode) {
-      case 200:
-      case 201:
-      case 202:
-        if (json.decode(response.body)['status'] == 'NEW') {
+    try {
+      Map<String, String> headers = {
+        'Content-Type': 'application/json-patch+json',
+      };
+      Map<String, dynamic> body = {'idToken': idToken};
+      var jsonBody = jsonEncode(body);
+      final response = await http.post(
+          Uri.parse(APIPathConstant.API_SERVER_PATH + '/api/auth/google/student'),
+          headers: headers,
+          body: jsonBody);
+      final Map<String, dynamic> data =
+      json.decode(response.body);
+      var accessToken = data['accessToken'];
+      switch (response.statusCode) {
+        case 200:
+          return getAccount(json.decode(response.body), accessToken);
+        case 201:
+          return getAccount(json.decode(response.body), accessToken);
+        default:
           return null;
-        } else {
-          return getAccount(json.decode(response.body));
-        }
-      default:
-        return null;
-    }
+      }
+    } catch (e) {}
   }
 
   Future<UserModel?> register({
@@ -103,7 +104,7 @@ class UserService {
       case 200:
       case 201:
       case 202:
-        return getAccount(json.decode(response.body));
+        return getAccount(json.decode(response.body), idToken);
       default:
         return null;
     }
@@ -111,7 +112,8 @@ class UserService {
 
   Future<UserModel?> updateProfile({
     required String jwt,
-    required String name,
+    required String firstName,
+    required String lastName,
     required String mail,
     String? phoneNumber,
     String? school,
@@ -125,7 +127,8 @@ class UserService {
         HttpHeaders.authorizationHeader: 'Bearer $jwt',
       },
       body: jsonEncode({
-        'name': name,
+        'firstName': firstName,
+        'lastName' : lastName,
         'email': mail,
         'grade': grade ?? '',
         'birthDate': '',
@@ -138,7 +141,7 @@ class UserService {
       case 200:
       case 201:
       case 202:
-        return getAccount(json.decode(response.body));
+        return getAccount(json.decode(response.body), jwt);
       default:
         return null;
     }
@@ -147,25 +150,28 @@ class UserService {
   Future<UserModel?> fetchUserProfile({
     required String jwt,
   }) async {
-    final http.Response response = await http.get(
-      Uri.http(APIPathConstant.API_SERVER_PATH, '/api/v1/auth/profile'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        HttpHeaders.authorizationHeader: 'Bearer $jwt',
-      },
-    );
-    switch (response.statusCode) {
-      case 200:
-      case 201:
-      case 202:
-        return getAccount(json.decode(response.body));
-      default:
-        return null;
-    }
+    try {
+      Map<String, String> bearerHeaders = {
+        'Content-Type': 'application/json-patch+json',
+        'Authorization': 'Bearer ${jwt}',};
+
+      final response = await http.get(
+        Uri.parse(APIPathConstant.API_SERVER_PATH + '/api/students/information'),
+        headers: bearerHeaders,
+      );
+      switch (response.statusCode) {
+        case 200:
+          return getAccount(json.decode(response.body), jwt);
+        case 201:
+          return getAccount(json.decode(response.body), jwt);
+        default:
+          return null;
+      }
+    } catch (e) {}
   }
 
-  static UserModel getAccount(Map<String, dynamic> jsonData) {
-    UserModel userModel = UserModel.fromJson(jsonData);
+  static UserModel getAccount(Map<String, dynamic> jsonData, String accessToken) {
+    UserModel userModel = UserModel.fromJson(jsonData, accessToken);
     return userModel;
   }
 }

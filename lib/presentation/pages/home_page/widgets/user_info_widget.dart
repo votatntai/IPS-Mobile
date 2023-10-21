@@ -56,7 +56,7 @@ class UserInfoWidget extends StatelessWidget {
                   children: [
                     !state.isLoadData
                         ? Text(
-                            'Good Afternoon, ${state.userModel?.name}!',
+                            'Good Afternoon ${state.userModel?.firstName}',
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w500,

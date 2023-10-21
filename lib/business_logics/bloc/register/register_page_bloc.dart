@@ -85,7 +85,7 @@ class RegisterPageBloc extends Bloc<RegisterPageEvent, RegisterPageState> {
     if (state.fullNameErrorMsg.isEmpty) {
       emit(state.updateStateWith(isWaitingRegister: true));
       UserModel? userModel = await _userService.register(
-        idToken: await state.firebaseUser.getIdToken(),
+        idToken: await state.firebaseUser.getIdToken() as String,
         name: nameTextEditingController.text,
         mail: mailTextEditingController.text,
         address: addressEditingController.text,

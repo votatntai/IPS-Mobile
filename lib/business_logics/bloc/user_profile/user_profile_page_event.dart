@@ -4,7 +4,9 @@ abstract class UserProfilePageEvent {}
 
 class InitEvent extends UserProfilePageEvent {}
 
-class FullNameValidationEvent extends UserProfilePageEvent {}
+class FirstNameValidationEvent extends UserProfilePageEvent {}
+
+class LastNameValidationEvent extends UserProfilePageEvent {}
 
 class PhoneValidationEvent extends UserProfilePageEvent {}
 

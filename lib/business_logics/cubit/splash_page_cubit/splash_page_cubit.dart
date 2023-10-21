@@ -33,7 +33,7 @@ class SplashPageCubit extends Cubit<SplashPageState> {
           final UserService userService = UserService();
 
           UserModel? userModel = await userService.signInToApp(
-              idToken: await user.getIdToken(true));
+              idToken: await user.getIdToken(true) as String);
           if (userModel != null) {
             const FlutterSecureStorage storage = FlutterSecureStorage();
             await storage.write(key: 'jwt', value: userModel.accessToken);

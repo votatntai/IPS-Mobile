@@ -25,7 +25,7 @@ class SaveButtonWidget extends StatelessWidget {
             builder: (context, state) {
               return InkWell(
                 onTap: () {
-                  if (state.fullNameErrorMsg.isEmpty && state.isChange) {
+                  if ((state.firstNameErrorMsg.isEmpty || state.lastNameErrorMsg.isEmpty) && state.isChange) {
                     BlocProvider.of<UserProfilePageBloc>(context)
                         .add(SaveButtonEvent(buildContext: context));
                   }
@@ -34,12 +34,12 @@ class SaveButtonWidget extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 6, horizontal: 60),
                   decoration: BoxDecoration(
-                    color: state.fullNameErrorMsg.isEmpty && state.isChange
+                    color: (state.firstNameErrorMsg.isEmpty || state.lastNameErrorMsg.isEmpty) && state.isChange
                         ? const Color.fromARGB(255, 255, 161, 79)
                         : ColorConstant.kOrangeColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
-                        color: state.fullNameErrorMsg.isEmpty && state.isChange
+                        color: (state.firstNameErrorMsg.isEmpty || state.lastNameErrorMsg.isEmpty) && state.isChange
                             ? ColorConstant.kOrangeColor
                             : ColorConstant.kOrangeColor.withOpacity(0.3),
                         width: 1.5),
@@ -47,7 +47,7 @@ class SaveButtonWidget extends StatelessWidget {
                   child: Text(
                     'SAVE PROFILE',
                     style: TextStyle(
-                      color: state.fullNameErrorMsg.isEmpty && state.isChange
+                      color: (state.firstNameErrorMsg.isEmpty || state.lastNameErrorMsg.isEmpty) && state.isChange
                           ? ColorConstant.kWhiteColor
                           : ColorConstant.kWhiteColor.withOpacity(0.7),
                       fontSize: 18,

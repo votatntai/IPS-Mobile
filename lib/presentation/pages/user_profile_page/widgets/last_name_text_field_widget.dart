@@ -7,13 +7,13 @@ import '../../../../business_logics/bloc/user_profile/user_profile_page_state.da
 import '../../../custom_widgets/custom_text_field.dart';
 import '../../../utilities/color_constant.dart';
 
-class NameTextFieldWidget extends StatelessWidget {
-  const NameTextFieldWidget({Key? key}) : super(key: key);
+class LastNameTextFieldWidget extends StatelessWidget {
+  const LastNameTextFieldWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     UserProfilePageBloc userProfilePageBloc =
-        BlocProvider.of<UserProfilePageBloc>(context);
+    BlocProvider.of<UserProfilePageBloc>(context);
 
     return BlocBuilder<UserProfilePageBloc, UserProfilePageState>(
       builder: (context, state) {
@@ -27,7 +27,7 @@ class NameTextFieldWidget extends StatelessWidget {
                   children: const [
                     Icon(Icons.person_pin_sharp),
                     Text(
-                      "Full name:",
+                      "Last name:",
                     ),
                   ],
                 ),
@@ -36,27 +36,27 @@ class NameTextFieldWidget extends StatelessWidget {
             CustomTextField(
               isEnabled: true,
               onInputText: (_) {
-                userProfilePageBloc.add(FullNameValidationEvent());
+                userProfilePageBloc.add(LastNameValidationEvent());
               },
               inputType: TextInputType.name,
               inputAction: TextInputAction.next,
               elevation: 0.0,
               textEditingController:
-                  userProfilePageBloc.nameTextEditingController,
-              focusNode: userProfilePageBloc.nameFocusNode,
-              hintText: 'Full name',
-              borderColor: state.fullNameErrorMsg.isEmpty
+              userProfilePageBloc.lastNameTextEditingController,
+              focusNode: userProfilePageBloc.lastNameFocusNode,
+              hintText: 'First name',
+              borderColor: state.lastNameErrorMsg.isEmpty
                   ? null
                   : ColorConstant.kRedColor,
             ),
             Visibility(
-              visible: userProfilePageBloc.state.fullNameErrorMsg.isNotEmpty,
+              visible: userProfilePageBloc.state.lastNameErrorMsg.isNotEmpty,
               child: Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    userProfilePageBloc.state.fullNameErrorMsg,
+                    userProfilePageBloc.state.lastNameErrorMsg,
                     style: const TextStyle(
                       color: ColorConstant.kRedColor,
                     ),
